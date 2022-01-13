@@ -44,5 +44,7 @@ func AddContractWatch(w http.ResponseWriter, r *http.Request) {
 		},
 	)
 
-	receiptLogWatcher.Run()
+	go receiptLogWatcher.Run()
 }
+
+func DeleteContractWatch(w http.ResponseWriter, r *http.Request) {}
