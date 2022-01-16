@@ -69,4 +69,6 @@ func (a *App) InitializeRestAPI() {
 
 var routes = Routes{
 	Route{"AddContractWatch", "PATCH", "/watch", controller.AddContractWatch},
+	Route{"NewBlockNumber", "PATCH", "/block", controller.NewBlockNumber},
+	Route{"NewERC20Transfer", "PATCH", "/transfer", controller.NewERC20Transfer},
 }
