@@ -8,3 +8,5 @@
 - Polygon: 0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0
 - Gala: 0x15D4c048F83bd7e37d49eA4C83a07267Ec4203dA
 - Quant: 0x4a220e6096b25eadb88358cb44068a3248254675
+
+### Integration with kafka implements [kafka-go](https://github.com/segmentio/kafka-go)
