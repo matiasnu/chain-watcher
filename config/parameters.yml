@@ -1,8 +1,8 @@
 # API
-# api_logic_host: "127.0.0.1"
-# api_logic_port: "8080"
-# api_logic_username : admin
-# api_logic_password : admin
+api_logic_host: "127.0.0.1"
+api_logic_port: "8080"
+api_logic_username : admin
+api_logic_password : admin
 
 # MONGODB
 # api_logic_mongodb_host: "127.0.0.1"
@@ -11,3 +11,9 @@
 # ETH
 # eth_rpc_url: "wss://mainnet.infura.io/ws/v3/de7b88292dd84b3b85c21defaf9f6576"
 eth_rpc_url: "http://localhost:8545"
+# eth_rpc_user
+# eth_rpc_pw
+
+# KAFKA
+kafka_brokers:  # Example localhost:19092,localhost:29092,localhost:39092
+kafka_topic: topic

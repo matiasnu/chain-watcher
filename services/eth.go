@@ -3,8 +3,10 @@ package services
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/matiasnu/chain-watcher/config"
+	"github.com/matiasnu/chain-watcher/events"
 	"github.com/matiasnu/chain-watcher/models"
 	watcher "github.com/matiasnu/ethereum-watcher"
 	"github.com/matiasnu/ethereum-watcher/blockchain"
@@ -21,8 +23,13 @@ func (e *EthService) AddContractWatch(contractWatch models.ContractWatch) {
 	handler := func(from, to int, receiptLogs []blockchain.IReceiptLog, isUpToHighestBlock bool) error {
 		// logrus.Infof("USDT Transfer count: %d, %d -> %d", len(receiptLogs), from, to)
 		for _, receiptLog := range receiptLogs {
-			logrus.Infof("USDT Transfer >> %s -> %s, amount: %s, contractAddress %s",
+			message := fmt.Sprintf("USDT Transfer >> %s -> %s, amount: %s, contractAddress %s",
 				receiptLog.GetTopics()[0], receiptLog.GetTopics()[1], receiptLog.GetTopics()[2], receiptLog.GetAddress())
+			logrus.Info(message)
+			// Publish event in kafka
+			publisher := events.NewPublisher(strings.Split(config.ConfMap.KafkaBrokers, ","), config.ConfMap.KafkaTopic)
+			publisher.Publish(context.Background(), models.Request{Username: "default", Message: message})
+			logrus.Info("Event published")
 		}
 
 		return nil

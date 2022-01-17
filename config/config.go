@@ -32,14 +32,9 @@ type Configuration struct {
 	APIRestServerPort string `mapstructure:"api_logic_port"`
 	APIRestUsername   string `mapstructure:"api_logic_username"`
 	APIRestPassword   string `mapstructure:"api_logic_password"`
-	// APIRestMongoDBServerHost string `mapstructure:"api_logic_mongodb_host"`
-	// APIRestMongoDBServerPort string `mapstructure:"api_logic_mongodb_port"`
-	// APIRestMongoDBServerUser string `mapstructure:"api_logic_mongodb_user"`
-	// APIRestMongoDBServerPw   string `mapstructure:"api_logic_mongodb_pw"`
-	// ETH properties
-	EthRpcUrl string `mapstructure:"eth_rpc_url"`
-	// ETH_RPC_USER string `mapstructure:"eth_rpc_user"`
-	// ETH_RPC_PW   string `mapstructure:"eth_rpc_pw"`
+	EthRpcUrl         string `mapstructure:"eth_rpc_url"`
+	KafkaBrokers      string `mapstructure:"kafka_brokers"`
+	KafkaTopic        string `mapstructure:"kafka_topic"`
 }
 
 // Config is package struct containing conf params
@@ -71,6 +66,10 @@ func Load(path string, name string, ext string) {
 	viper.SetDefault("eth_rpc_url", "http://127.0.0.1:8545")
 	// viper.SetDefault("eth_rpc_user", "")
 	// viper.SetDefault("eth_rpc_pw", "")
+
+	// Kafka
+	viper.SetDefault("kafka_brokers", "")
+	viper.SetDefault("kafka_topic", "")
 
 	if _, err := os.Stat(filepath.Join(path, name+"."+ext)); err == nil {
 		err = viper.ReadInConfig()
